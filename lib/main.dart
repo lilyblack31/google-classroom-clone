@@ -4,6 +4,8 @@ import 'package:classroom/screens/authenticate/sign_up.dart';
 import 'package:classroom/screens/views/create_class.dart';
 import 'package:classroom/screens/views/enrolled_classes.dart';
 import 'package:classroom/screens/views/home.dart';
+import 'package:classroom/screens/views/homestu.dart';
+import 'package:classroom/screens/views/role.dart';
 import 'package:classroom/screens/views/join_class.dart';
 import 'package:classroom/screens/views/subject_class.dart';
 import 'package:classroom/screens/views/subject_class_student.dart';
@@ -76,7 +78,9 @@ class MyApp extends StatelessWidget {
           home: Wrapper(),
           routes: {
             SignUp.routeName: (_) => SignUp(),
+            role.routeName: (_) => role(),
             Home.routeName: (_) => Home(),
+            homestu.routeName: (_) => homestu(),
             SignIn.routeName: (_) => SignIn(),
             CreateClass.routeName: (_) => CreateClass(),
             LogOut.routeName: (_) => LogOut(),

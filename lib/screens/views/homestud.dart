@@ -11,14 +11,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../services/auth.dart';
 
-class Home extends StatefulWidget {
-  static const routeName = '/home';
+class homestud extends StatefulWidget {
+  static const routeName = '/homestud';
 
   @override
-  _HomeState createState() => _HomeState();
+  _homestudState createState() => _homestudState();
 }
 
-class _HomeState extends State<Home> {
+class _homestudState extends State<homestud> {
   final _auth = AuthService();
   int _index = 0;
   @override
@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
     var imgURL;
     if (user == null) {
       imgURL =
-          'https://cdn3.iconfinder.com/data/icons/user-interface-web-1/550/web-circle-circular-round_54-512.png';
+      'https://cdn3.iconfinder.com/data/icons/user-interface-web-1/550/web-circle-circular-round_54-512.png';
     } else {
       imgURL = user.photoURL != null
           ? user.photoURL
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
     ;
     var height =
         MediaQuery.of(context).size.height - AppBar().preferredSize.height;
-    final name = user != null ? user.displayName : 'Name';
+    //final name = user != null ? user.displayName : 'Name';
     return Scaffold(
       // drawer: CustomDrawer(),
       appBar: AppBar(
@@ -44,9 +44,8 @@ class _HomeState extends State<Home> {
         actions: [
           IconButton(
             onPressed: () async {
-              //_auth.signOut();
-              Navigator.of(context).pushNamed(LogOut.routeName,
-                  arguments: user);
+              _auth.signOut();
+
               print('Logged out');
             },
             icon: Icon(Icons.logout),
@@ -55,7 +54,8 @@ class _HomeState extends State<Home> {
         iconTheme: IconThemeData(color: Theme.of(context).accentColor),
         backgroundColor: Colors.white,
         title: Text(
-          name,
+          'Classroom Application Flipr Hackathon X',
+          //name,
           style: TextStyle(color: Theme.of(context).accentColor),
         ),
       ),
@@ -65,31 +65,41 @@ class _HomeState extends State<Home> {
             UserInfo(imgURL: imgURL, user: user),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 28, vertical: 20.0),
+              const EdgeInsets.symmetric(horizontal: 28, vertical: 20.0),
               child: Text(
-                'TEACHER SECTION',
+                'Manage your classes like never before. 😁😁',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.questrial(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w900,
-                  color: Color.fromRGBO(20, 33, 61, 1),
+                  color: Color.fromRGBO(61, 25, 20, 1.0),
                   wordSpacing: 2.5,
                 ),
               ),
             ),
-
+            Padding(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 28, vertical: 20.0),
+              child: Text(
+                'Either be a student or a teacher',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.questrial(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w900,
+                  color: Color.fromRGBO(229, 195, 27, 1.0),
+                  wordSpacing: 2.5,
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28),
               child: Divider(),
             ),
-
-            SizedBox(
-              height: 20,
-            ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 28, vertical: 20.0),
               child: Text(
-                'Teacher\'s section',
+                'Student\'s section',
                 style: kPageTitleStyleBlack,
               ),
             ),
@@ -101,7 +111,7 @@ class _HomeState extends State<Home> {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, CreateClass.routeName);
+                    Navigator.of(context).pushNamed(JoinClass.routeName);
                   },
                   child: Container(
                     padding: EdgeInsets.all(30),
@@ -117,11 +127,11 @@ class _HomeState extends State<Home> {
                             ),
                           )
                         ],
-                        color: Color.fromRGBO(52, 46, 55, 1),
+                        color: Color.fromRGBO(60, 230, 216, 1.0),
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     width: MediaQuery.of(context).size.width * .4,
                     child: Text(
-                      'Create a new class',
+                      'Join a new class',
                       textAlign: TextAlign.center,
                       style: kPageTitleStyle,
                     ),
@@ -129,7 +139,7 @@ class _HomeState extends State<Home> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed(CreatedClasses.routeName,
+                    Navigator.of(context).pushNamed(EnrolledClasses.routeName,
                         arguments: user.email);
                   },
                   child: Container(
@@ -146,7 +156,7 @@ class _HomeState extends State<Home> {
                             ),
                           )
                         ],
-                        color: Color.fromRGBO(60, 145, 230, 1),
+                        color: Color.fromRGBO(46, 49, 55, 1.0),
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     width: MediaQuery.of(context).size.width * .4,
                     child: Text(
@@ -157,7 +167,10 @@ class _HomeState extends State<Home> {
                   ),
                 )
               ],
-            )
+            ),
+            SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
@@ -186,14 +199,13 @@ class UserInfo extends StatelessWidget {
             'You are currently signed in as..',
             style: GoogleFonts.roboto(),
           ),
-
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 28.0, vertical: 10),
+              const EdgeInsets.symmetric(horizontal: 28.0, vertical: 10),
               child: Container(
                   width: 50.0,
                   height: 50.0,
@@ -207,12 +219,13 @@ class UserInfo extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(user.displayName,
+                  /*Text(user.displayName,
                       style:
-                          GoogleFonts.questrial(fontWeight: FontWeight.bold)),
-                  Text(user.email,
+                      GoogleFonts.questrial(fontWeight: FontWeight.bold)),*/
+                  Text(//user.email,
+                      'Classroom Application Flipr Hackathon X',
                       style:
-                          GoogleFonts.questrial(fontWeight: FontWeight.w100)),
+                      GoogleFonts.questrial(fontWeight: FontWeight.w100)),
                 ],
               ),
             )

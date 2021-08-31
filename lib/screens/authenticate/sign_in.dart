@@ -1,5 +1,6 @@
 import 'package:classroom/screens/authenticate/sign_up.dart';
 import 'package:classroom/services/loading.dart';
+import 'package:classroom/screens/views/role.dart';
 import 'package:flutter/material.dart';
 import 'package:classroom/services/auth.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -193,6 +194,10 @@ class _SignInState extends State<SignIn> {
                                             err = value.error.toString();
                                           });
                                           // print('$err err msg');
+                                          Navigator.pushNamed(
+                                            context,
+                                            role.routeName,
+                                          );
                                         }
                                       },
                                       child: Center(

@@ -11,14 +11,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../services/auth.dart';
 
-class Home extends StatefulWidget {
-  static const routeName = '/home';
+class homestu extends StatefulWidget {
+  static const routeName = '/homestu';
 
   @override
-  _HomeState createState() => _HomeState();
+  _homestuState createState() => _homestuState();
 }
 
-class _HomeState extends State<Home> {
+class _homestuState extends State<homestu> {
   final _auth = AuthService();
   int _index = 0;
   @override
@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
     var imgURL;
     if (user == null) {
       imgURL =
-          'https://cdn3.iconfinder.com/data/icons/user-interface-web-1/550/web-circle-circular-round_54-512.png';
+      'https://cdn3.iconfinder.com/data/icons/user-interface-web-1/550/web-circle-circular-round_54-512.png';
     } else {
       imgURL = user.photoURL != null
           ? user.photoURL
@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
         actions: [
           IconButton(
             onPressed: () async {
-              //_auth.signOut();
+
               Navigator.of(context).pushNamed(LogOut.routeName,
                   arguments: user);
               print('Logged out');
@@ -65,9 +65,9 @@ class _HomeState extends State<Home> {
             UserInfo(imgURL: imgURL, user: user),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 28, vertical: 20.0),
+              const EdgeInsets.symmetric(horizontal: 28, vertical: 20.0),
               child: Text(
-                'TEACHER SECTION',
+                'Manage your classes like never before. 😁😁',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.questrial(
                   fontSize: 20.0,
@@ -77,19 +77,29 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-
+            Padding(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 28, vertical: 20.0),
+              child: Text(
+                'Either be a student or a teacher',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.questrial(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w900,
+                  color: Color.fromRGBO(20, 33, 61, 1),
+                  wordSpacing: 2.5,
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28),
               child: Divider(),
             ),
-
-            SizedBox(
-              height: 20,
-            ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 28, vertical: 20.0),
               child: Text(
-                'Teacher\'s section',
+                'Student\'s section',
                 style: kPageTitleStyleBlack,
               ),
             ),
@@ -101,36 +111,7 @@ class _HomeState extends State<Home> {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, CreateClass.routeName);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(30),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 25.0, // soften the shadow
-                            spreadRadius: 5.0, //extend the shadow
-                            offset: Offset(
-                              15.0, // Move to right 10  horizontally
-                              15.0, // Move to bottom 10 Vertically
-                            ),
-                          )
-                        ],
-                        color: Color.fromRGBO(52, 46, 55, 1),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    width: MediaQuery.of(context).size.width * .4,
-                    child: Text(
-                      'Create a new class',
-                      textAlign: TextAlign.center,
-                      style: kPageTitleStyle,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(CreatedClasses.routeName,
-                        arguments: user.email);
+                    Navigator.of(context).pushNamed(JoinClass.routeName);
                   },
                   child: Container(
                     padding: EdgeInsets.all(30),
@@ -150,6 +131,35 @@ class _HomeState extends State<Home> {
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     width: MediaQuery.of(context).size.width * .4,
                     child: Text(
+                      'Join a new class',
+                      textAlign: TextAlign.center,
+                      style: kPageTitleStyle,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(EnrolledClasses.routeName,
+                        arguments: user.email);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(30),
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 25.0, // soften the shadow
+                            spreadRadius: 5.0, //extend the shadow
+                            offset: Offset(
+                              15.0, // Move to right 10  horizontally
+                              15.0, // Move to bottom 10 Vertically
+                            ),
+                          )
+                        ],
+                        color: Color.fromRGBO(52, 46, 55, 1),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    width: MediaQuery.of(context).size.width * .4,
+                    child: Text(
                       'View classes',
                       textAlign: TextAlign.center,
                       style: kPageTitleStyle,
@@ -157,8 +167,8 @@ class _HomeState extends State<Home> {
                   ),
                 )
               ],
-            )
-          ],
+            ),
+         ],
         ),
       ),
     );
@@ -186,14 +196,13 @@ class UserInfo extends StatelessWidget {
             'You are currently signed in as..',
             style: GoogleFonts.roboto(),
           ),
-
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 28.0, vertical: 10),
+              const EdgeInsets.symmetric(horizontal: 28.0, vertical: 10),
               child: Container(
                   width: 50.0,
                   height: 50.0,
@@ -209,10 +218,10 @@ class UserInfo extends StatelessWidget {
                 children: [
                   Text(user.displayName,
                       style:
-                          GoogleFonts.questrial(fontWeight: FontWeight.bold)),
+                      GoogleFonts.questrial(fontWeight: FontWeight.bold)),
                   Text(user.email,
                       style:
-                          GoogleFonts.questrial(fontWeight: FontWeight.w100)),
+                      GoogleFonts.questrial(fontWeight: FontWeight.w100)),
                 ],
               ),
             )

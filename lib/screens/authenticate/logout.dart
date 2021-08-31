@@ -1,3 +1,4 @@
+import 'package:classroom/screens/authenticate/sign_up.dart';
 import 'package:classroom/screens/views/home.dart';
 import 'package:classroom/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -10,19 +11,15 @@ class LogOut extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Text('Are you sure you wanna logout?'),
+
           RaisedButton(
-            child: Text('Yes'),
+            child: Text('Click to logout'),
             onPressed: () async {
               await _auth.signOut();
+              Navigator.popAndPushNamed(context,'/signin');
             },
           ),
-          RaisedButton(
-            child: Text('Get back to classes'),
-            onPressed: () async {
-              Navigator.popAndPushNamed(context, Home.routeName);
-            },
-          )
+
         ],
       ),
     );
